@@ -6,12 +6,15 @@ This project contains automated UI tests for the [SauceDemo](https://www.saucede
 
 The tests use Playwright with TypeScript to verify key user journeys, login behaviour, product information, shopping cart functionality, and checkout validation.
 
+The test suite runs automatically through GitHub Actions on pushes and pull requests targeting the `main` branch. The workflow installs dependencies and Chromium, executes the tests, and uploads the HTML test report as an artifact.
+
 ## Technologies Used
 
 * **Playwright Test** — browser automation and test assertions
 * **TypeScript** — programming language
 * **Node.js and npm** — JavaScript runtime and package management
 * **Visual Studio Code** — development environment
+* **GitHub Actions** — continuous integration and automated test execution
 
 ## Test Coverage
 
