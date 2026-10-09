@@ -39,7 +39,7 @@ The project currently includes eight automated test scenarios:
 Clone the repository and navigate to the project directory:
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/olga-qa-engineer/saucedemo-playwright-automation.git
 cd saucedemo-playwright-automation
 ```
 
