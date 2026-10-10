@@ -1,17 +1,15 @@
 import { test, expect } from '@playwright/test';
 
-test('successful login with valid credentials', async ({ page }) => {
-  // Open the SauceDemo website
+// Helper function for logging in
+async function login(page: import('@playwright/test').Page) {
   await page.goto('https://www.saucedemo.com/');
-
-  // Enter the username
   await page.locator('[data-test="username"]').fill('standard_user');
-
-  // Enter the password
   await page.locator('[data-test="password"]').fill('secret_sauce');
-
-  // Click the Login button
   await page.locator('[data-test="login-button"]').click();
+}
+
+test('successful login with valid credentials', async ({ page }) => {
+  await login(page);
 
   // Verify that the Products page is displayed
   await expect(page).toHaveURL(/inventory.html/);
@@ -69,10 +67,7 @@ test('locked-out user cannot log in', async ({ page }) => {
 
 test('products page displays expected products and prices', async ({ page }) => {
   // Log in with valid credentials
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  await login(page);
 
   // Verify that the Products heading is visible
   await expect(
@@ -100,10 +95,7 @@ test('products page displays expected products and prices', async ({ page }) => 
 
 test('user can add a product to the shopping cart', async ({ page }) => {
   // Log in with valid credentials
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  await login(page);
 
   // Add the Sauce Labs Backpack to the cart
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -129,10 +121,7 @@ test('user can add a product to the shopping cart', async ({ page }) => {
 
 test('user can remove a product from the shopping cart', async ({ page }) => {
   // Log in with valid credentials
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  await login(page);
 
   // Add the Backpack to the cart
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -161,10 +150,7 @@ test('user can remove a product from the shopping cart', async ({ page }) => {
 
 test('checkout requires a first name', async ({ page }) => {
   // Log in
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  await login(page);
 
   // Add a product to the cart
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
@@ -188,10 +174,7 @@ test('checkout requires a first name', async ({ page }) => {
 
 test('user can complete a purchase successfully', async ({ page }) => {
   // Log in
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  await login(page);
 
   // Add the Backpack to the cart
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
