@@ -229,3 +229,11 @@ test('shopping cart badge shows one after adding a product', async ({ page }) =>
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
   await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
 });
+
+test('cart badge disappears after removing a product', async ({ page }) => {
+  await login(page);
+  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+  await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+  await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
+  await expect(page.locator('.shopping_cart_badge')).toBeHidden();
+});
