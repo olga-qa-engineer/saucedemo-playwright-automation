@@ -176,7 +176,12 @@ test('checkout requires a first name', async ({ page }) => {
   // Continue checkout
   await page.locator('[data-test="continue"]').click();
 
-  // Verify that the required first-name error appears
+  // Verify that the error message is displayed
+  await expect(
+    page.locator('[data-test="error"]')
+  ).toBeVisible();
+
+  // Verify that the error message is correct
   await expect(
     page.locator('[data-test="error"]')
   ).toContainText('First Name is required');
