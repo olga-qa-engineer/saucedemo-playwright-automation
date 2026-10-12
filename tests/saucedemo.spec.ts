@@ -214,3 +214,12 @@ test('user can complete a purchase successfully', async ({ page }) => {
     page.getByText('Thank you for your order!', { exact: true })
   ).toBeVisible();
 });
+
+test('products can be sorted by price from low to high', async ({ page }) => {
+  await login(page);
+  await page.locator('[data-test="product-sort-container"]').selectOption('lohi');
+  await expect(page.locator('.inventory_item')).toHaveCount(6);
+  const prices = await page.locator('.inventory_item_price').allTextContents();
+  const numericPrices = prices.map(price => Number(price.replace('$', '')));
+  expect(numericPrices).toEqual([...numericPrices].sort((a, b) => a - b));
+});
