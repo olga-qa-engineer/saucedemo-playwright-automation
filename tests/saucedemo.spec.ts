@@ -79,6 +79,11 @@ test('products page displays expected products and prices', async ({ page }) => 
     page.getByText('Products', { exact: true })
   ).toBeVisible();
 
+  // Verify that six products are displayed
+  await expect(
+    page.locator('.inventory_item')
+  ).toHaveCount(6);
+
   // Verify that two expected products are displayed
   await expect(
     page.getByText('Sauce Labs Backpack', { exact: true })
