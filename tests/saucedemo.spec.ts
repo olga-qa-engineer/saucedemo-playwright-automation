@@ -237,3 +237,12 @@ test('cart badge disappears after removing a product', async ({ page }) => {
   await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
   await expect(page.locator('.shopping_cart_badge')).toBeHidden();
 });
+
+test('shopping cart displays the correct product', async ({ page }) => {
+  await login(page);
+  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+  await page.locator('.shopping_cart_link').click();
+  await expect(
+    page.getByText('Sauce Labs Backpack', { exact: true })
+  ).toBeVisible();
+});
