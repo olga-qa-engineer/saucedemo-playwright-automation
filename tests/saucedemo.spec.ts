@@ -36,6 +36,11 @@ test('login fails with an incorrect password', async ({ page }) => {
     page.locator('[data-test="error"]')
   ).toBeVisible();
 
+  // Verify that the error message is correct
+  await expect(
+    page.locator('[data-test="error"]')
+  ).toContainText('Username and password do not match');
+
   // Verify that the user stays on the login page
   await expect(page).toHaveURL('https://www.saucedemo.com/');
 });
