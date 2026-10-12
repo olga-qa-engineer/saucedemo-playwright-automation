@@ -223,3 +223,9 @@ test('products can be sorted by price from low to high', async ({ page }) => {
   const numericPrices = prices.map(price => Number(price.replace('$', '')));
   expect(numericPrices).toEqual([...numericPrices].sort((a, b) => a - b));
 });
+
+test('shopping cart badge shows one after adding a product', async ({ page }) => {
+  await login(page);
+  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+  await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+});
